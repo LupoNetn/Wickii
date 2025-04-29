@@ -1,10 +1,16 @@
 import React from 'react'
 import Header from '../components/Header'
+import UserStats from '../components/UserStats'
 
 const Home = () => {
   return (
     <section>
-      <Header />
+      <div>
+        <Header />
+      </div>
+      <div>
+        <UserStats />
+      </div>
     </section>
   )
 }
