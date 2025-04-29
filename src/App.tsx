@@ -1,13 +1,21 @@
 import React from 'react'
-import { BrowserRouter,Routes,Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import AuthorizedLayout from './components/AuthorizedLayout'
+import Home from './pages/Home'
+import Create from './pages/Create'
+import Profile from './pages/Profile'
 
-const App:React.FC = () => {
+const App: React.FC = () => {
   return (
-   
-    <div>
-      
-    </div>
-  
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AuthorizedLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
