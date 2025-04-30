@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
 const testimonials = [
   {
@@ -30,6 +31,14 @@ const testimonials = [
 const UserStats = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
 
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % testimonials.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  }
+
   // Auto-advance carousel every 5 seconds
   useEffect(() => {
     const timer = setInterval(() => {
@@ -39,70 +48,90 @@ const UserStats = () => {
   }, [])
 
   return (
-    <section className="py-16 md:py-24 bg-gray-50">
-      {/* Header Text */}
+    <section className="py-16 md:py-24 bg-gradient-to-r from-gray-900 to-gray-800">
       <div className="container mx-auto px-4 mb-16">
-        <h2 className="text-3xl md:text-5xl font-bold text-center text-gray-900 mb-8">
+        <h2 className="text-3xl md:text-5xl font-bold text-center bg-gradient-to-r from-emerald-400 to-teal-400 text-transparent bg-clip-text mb-8">
           Join Our Active Members
         </h2>
       </div>
 
-      {/* Stats Section */}
       <div className="container mx-auto px-4 mb-24">
         <div className="grid grid-cols-2 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-center">
-          <div className="p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-            <p className="text-4xl md:text-6xl font-bold text-gray-900">50K+</p>
-            <p className="text-gray-600 mt-2">Active Users</p>
+          <div className="p-8 bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-xl 
+            transition-all duration-300 border border-gray-700/20">
+            <p className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 
+              text-transparent bg-clip-text">200+</p>
+            <p className="text-gray-400 mt-2">Active Users</p>
           </div>
-          <div className="p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
-            <p className="text-4xl md:text-6xl font-bold text-gray-900">98%</p>
-            <p className="text-gray-600 mt-2">Satisfaction Rate</p>
+          <div className="p-8 bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-xl 
+            transition-all duration-300 border border-gray-700/20">
+            <p className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 
+              text-transparent bg-clip-text">96%</p>
+            <p className="text-gray-400 mt-2">Satisfaction Rate</p>
           </div>
         </div>
       </div>
 
-      {/* Testimonials Carousel Section */}
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r 
+          from-emerald-400 to-teal-400 text-transparent bg-clip-text">
           What Our Users Say
         </h2>
         <div className="relative max-w-4xl mx-auto">
-          <div className="overflow-hidden">
+          {/* Navigation Buttons */}
+          <button 
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 p-2 rounded-full
+              bg-gray-800/80 hover:bg-gray-700/80 border border-gray-700/20 backdrop-blur-sm
+              text-emerald-400 hover:text-emerald-300 transition-all duration-300 z-10 cursor-pointer"
+          >
+            <FiChevronLeft size={24} />
+          </button>
+          
+          <button 
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 p-2 rounded-full
+              bg-gray-800/80 hover:bg-gray-700/80 border border-gray-700/20 backdrop-blur-sm
+              text-emerald-400 hover:text-emerald-300 transition-all duration-300 z-10 cursor-pointer"
+          >
+            <FiChevronRight size={24} />
+          </button>
+
+          <div className="overflow-hidden rounded-2xl">
             <div className="flex transition-transform duration-500 ease-in-out"
                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
               {testimonials.map((testimonial, index) => (
-                <div 
-                  key={index}
-                  className="w-full flex-shrink-0 px-4"
-                >
-                  <div className="bg-white p-8 rounded-xl shadow-lg">
+                <div key={index} className="w-full flex-shrink-0 px-4">
+                  <div className="bg-gray-800/80 backdrop-blur-md p-8 rounded-xl shadow-lg 
+                    border border-gray-700/20">
                     <div className="flex items-center mb-6">
                       <img 
                         src={testimonial.image} 
                         alt={testimonial.name}
-                        className="w-16 h-16 rounded-full mr-4"
+                        className="w-16 h-16 rounded-full mr-4 border-2 border-emerald-400/20"
                       />
                       <div>
-                        <h3 className="text-xl font-semibold text-gray-900">{testimonial.name}</h3>
-                        <p className="text-gray-600">{testimonial.role}</p>
+                        <h3 className="text-xl font-semibold text-emerald-400">{testimonial.name}</h3>
+                        <p className="text-gray-400">{testimonial.role}</p>
                       </div>
                     </div>
-                    <p className="text-lg text-gray-600 leading-relaxed">"{testimonial.content}"</p>
+                    <p className="text-lg text-gray-400 leading-relaxed">"{testimonial.content}"</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Carousel Navigation Dots */}
+          {/* Slide Markers */}
           <div className="flex justify-center space-x-2 mt-8">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                  currentSlide === index ? 'bg-gray-900' : 'bg-gray-300'
-                }`}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 
+                  ${currentSlide === index 
+                    ? 'bg-emerald-400 w-8' 
+                    : 'bg-gray-600 hover:bg-gray-500'}`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}

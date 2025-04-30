@@ -1,1 +1,41 @@
+/* // Color palette to use across components:
+// Primary: indigo-600 (#4F46E5)
+// Secondary: violet-500 (#8B5CF6)
+// Accent: rose-500 (#F43F5E)
+// Background: gradient from indigo-50 to violet-50
+// Glass effect: bg-white/80 with backdrop-blur */
+
 @import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables */
+:root {
+  --primary: #10B981;
+  --secondary: #14B8A6;
+}
+
+/* Theme Colors */
+.dark {
+  --bg-primary: #111827;
+  --bg-secondary: #1F2937;
+  --text-primary: #F9FAFB;
+  --text-secondary: #D1D5DB;
+  color-scheme: dark;
+}
+
+.light {
+  --bg-primary: #F9FAFB;
+  --bg-secondary: #F3F4F6;
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+}
+
+/* Global Styles */
+body {
+  background-color: theme(colors.gray.900);
+  color: theme(colors.gray.100);
+  transition: background-color 300ms, color 300ms;
+}

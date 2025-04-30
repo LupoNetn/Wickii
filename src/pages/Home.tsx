@@ -4,14 +4,10 @@ import UserStats from '../components/UserStats'
 
 const Home = () => {
   return (
-    <section>
-      <div>
-        <Header />
-      </div>
-      <div>
-        <UserStats />
-      </div>
-    </section>
+    <div className="min-h-screen bg-gray-900">
+      <Header />
+      <UserStats />
+    </div>
   )
 }
 

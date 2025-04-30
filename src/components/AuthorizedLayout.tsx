@@ -1,19 +1,17 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
-
-import BottomBar from './BottomBar';
 import Footer from './Footer'
-import { Outlet } from 'react-router-dom';
 
 const AuthorizedLayout = () => {
   return (
-    <>
+    <div className="min-h-screen bg-gray-900">
       <Navbar />
-      <main>
+      <main className="pt-16">
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 

@@ -5,21 +5,31 @@ const Navbar = () => {
   const [isDark, setIsDark] = React.useState(false)
 
   const toggleTheme = () => {
-    setIsDark(!isDark)
+    setIsDark(prev => !prev)
   }
 
   return (
-    <nav className='p-4 lg:px-14 lg:py-5 shadow-xl'>
-      <div className='flex justify-between items-center'>
-        <div>
-          <span className='text-2xl'>WICKII</span>
+    <nav className="fixed w-full backdrop-blur-md z-50 border-b bg-gray-900/80 border-gray-700/20">
+      <div className='container mx-auto p-4 lg:px-14 lg:py-5'>
+        <div className='flex justify-between items-center'>
+          <div>
+            <span className='text-2xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 text-transparent bg-clip-text'>
+              WICKII
+            </span>
+          </div>
+          <button 
+            onClick={toggleTheme}
+            className="p-2 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 
+              transition-all duration-300 shadow-lg backdrop-blur-sm border border-gray-700/20"
+            aria-label="Toggle theme"
+          >
+            {isDark ? (
+              <FiSun size={20} className="text-emerald-400" />
+            ) : (
+              <FiMoon size={20} className="text-emerald-400" />
+            )}
+          </button>
         </div>
-        <button 
-          onClick={toggleTheme}
-          className='p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800'
-        >
-          {isDark ? <FiSun size={20} /> : <FiMoon size={20} />}
-        </button>
       </div>
     </nav>
   )

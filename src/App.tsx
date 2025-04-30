@@ -8,13 +8,15 @@ import Profile from './pages/Profile'
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<AuthorizedLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/profile" element={<Profile />} />
-        </Route>
-      </Routes>
+      <div className="min-h-screen">
+        <Routes>
+          <Route element={<AuthorizedLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </div>
     </BrowserRouter>
   )
 }
