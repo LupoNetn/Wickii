@@ -1,8 +1,8 @@
-import React from 'react'
+import  { useState } from 'react'
 import { FiSun, FiMoon } from 'react-icons/fi'
 
 const Navbar = () => {
-  const [isDark, setIsDark] = React.useState(false)
+  const [isDark, setIsDark] = useState(false)
 
   const toggleTheme = () => {
     setIsDark(prev => !prev)

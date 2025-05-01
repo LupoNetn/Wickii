@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../supabase-client'
-import type { Profile } from '../types/supabase'
+
 
 const SignUp = () => {
     const [email, setEmail] = useState('')

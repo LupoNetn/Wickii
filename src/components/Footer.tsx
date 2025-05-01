@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { FiGithub, FiTwitter, FiLinkedin } from 'react-icons/fi'
 
 const Footer = () => {

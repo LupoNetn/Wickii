@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react'
+import { createContext, useState, useContext, ReactNode, useEffect } from 'react'
 
 interface ThemeContextType {
   isDark: boolean
@@ -35,7 +35,7 @@ const ThemeContextProvider = ({ children }: ThemeProviderProps) => {
   }, [isDark])
 
   const toggleTheme = () => {
-    setIsDark(prev => !prev)
+    setIsDark((prev: any) => !prev)
   }
 
   return (
