@@ -4,6 +4,7 @@ import AuthorizedLayout from './components/AuthorizedLayout'
 import Home from './pages/Home'
 import Create from './pages/Create'
 import Profile from './pages/Profile'
+import SignUp from './components/SignUp'
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/create" element={<Create />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path='/signup' element={<SignUp />} />
           </Route>
         </Routes>
       </div>

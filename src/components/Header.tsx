@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const features = [
   {
@@ -30,11 +31,13 @@ const Header = () => {
             Create engaging educational content or explore lessons crafted by fellow learners.
           </p>
           
+          <Link to='/signup'>
           <button className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-8 py-3 lg:px-12 lg:py-4 
             rounded-full font-semibold hover:opacity-90 transition duration-300 transform hover:scale-105 
             shadow-lg text-lg lg:text-xl backdrop-blur-sm cursor-pointer">
             Start Learning Now
           </button>
+          </Link>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 mt-16 lg:mt-24">
             {features.map((feature, index) => (
