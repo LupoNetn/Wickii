@@ -83,8 +83,8 @@ const SignUp = () => {
             Sign Up
           </button>
         </form>
-        <div>
-            <p>Already have an account? <Link to='/login'>Log in</Link></p>
+        <div className='text-center'>
+            <p>Already have an account? <span className='text-gray-50'><Link to='/login'>log in</Link></span></p>
         </div>
       </div>
     </div>
