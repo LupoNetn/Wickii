@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import AuthorizedLayout from "./components/AuthorizedLayout";
 import Home from "./pages/Home";
 import Create from "./pages/Create";
@@ -13,7 +13,7 @@ import VideoDetail from "./components/VideoDetail";
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter basename="/wickii">
+    <HashRouter>
       <div className="min-h-screen">
         <Routes>
           <Route element={<AuthorizedLayout />}>
@@ -36,7 +36,7 @@ const App: React.FC = () => {
           </Route>
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
