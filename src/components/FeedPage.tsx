@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
-
-
+import VideoCard from "./VideoCard"
 
 const FeedPage = () => {
   const [videos, setVideos] = useState<any[]>([])
@@ -39,30 +38,18 @@ const FeedPage = () => {
       <div className="max-w-6xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-semibold mb-6">Wickii: Learn in Bits</h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {loading
             ? Array.from({ length: 9 }).map((_, i) => (
                 <div
                   key={i}
-                  className="aspect-video bg-gray-800 rounded-lg animate-pulse"
+                  className="aspect-video bg-gray-800/50 rounded-lg animate-pulse"
                 >
-                  <div className="w-full h-full bg-gray-700"></div>
+                  <div className="w-full h-full bg-gray-700/50"></div>
                 </div>
               ))
             : videos.map((video) => (
-                <div
-                  key={video.id}
-                  className="aspect-video bg-gray-800 rounded-lg overflow-hidden shadow-lg"
-                >
-                  <video
-                    className="w-full h-full object-cover"
-                    controls
-                    playsInline
-                  >
-                    <source src={video.video_files[0]?.link} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
+                <VideoCard key={video.id} video={video} />
               ))}
         </div>
       </div>

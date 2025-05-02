@@ -9,6 +9,7 @@ import LogIn from "./components/LogIn";
 import FeedProtected from "./components/FeedProtected";
 import FeedPage from "./components/FeedPage";
 import AppLayout from "./components/AppLayout";
+import VideoDetail from "./components/VideoDetail";
 
 const App: React.FC = () => {
   return (
@@ -28,6 +29,7 @@ const App: React.FC = () => {
                   </FeedProtected>
                 }
               />
+              <Route path="/feed/:id" element={<VideoDetail />} />
               <Route path="/create" element={<Create />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
