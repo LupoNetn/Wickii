@@ -3,7 +3,7 @@
 const FeedPage = () => {
   return (
     <div>
-      
+      hello
     </div>
   )
 }

@@ -2,59 +2,89 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../supabase-client'
 
-
 const SignUp = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
     const [error, setError] = useState<string | null>(null)
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        setIsLoading(true)
         setError(null)
-        
+
         try {
-            // Step 1: Sign up the user
-            const { data: authData, error: authError } = await supabase.auth.signUp({
-                email,
+            // Input validation
+            if (!email || !password || !username) {
+                throw new Error('All fields are required')
+            }
+
+            if (password.length < 6) {
+                throw new Error('Password must be at least 6 characters')
+            }
+
+            if (username.length < 3) {
+                throw new Error('Username must be at least 3 characters')
+            }
+
+            // Check username availability
+            const { data: existingUser } = await supabase
+                .from('profiles')
+                .select('username')
+                .eq('username', username.trim())
+                .maybeSingle()
+
+            if (existingUser) {
+                throw new Error('Username already taken')
+            }
+
+            // Sign up user
+            const { data, error: signUpError } = await supabase.auth.signUp({
+                email: email.toLowerCase().trim(),
                 password,
                 options: {
                     data: {
-                        username,
-                    },
-                },
+                        username: username.trim()
+                    }
+                }
             })
 
-            if (authError) throw authError
+            if (signUpError) throw signUpError
 
-            if (!authData.user?.id) {
-                throw new Error('User data is missing after signup')
+            // Verify user data exists
+            if (!data?.user?.id) {
+                throw new Error('Sign up failed - please try again')
             }
 
-            // Step 2: Create user profile
-            const { error: profileError } = await supabase
-                .from('profiles')
-                .insert([{
-                    id: authData.user.id,  // This should now be UUID type
-                    username: username,
-                    email: email
-                }])
+            // Create profile
+            // const { error: profileError } = await supabase
+            //     .from('profiles')
+            //     .insert({
+            //         id: data.user.id,
+            //         username: username.trim(),
+            //         email: email.toLowerCase().trim()
+            //     })
 
-            if (profileError) {
-                console.error('Profile creation error:', profileError)
-                await supabase.auth.signOut()
-                throw new Error(`Profile creation failed: ${profileError.message}`)
-            }
+            // if (profileError) {
+            //     console.error('Profile creation error:', profileError)
+            //     await supabase.auth.signOut()
+            //     throw new Error(`Profile creation failed: ${profileError.message}`)
+            // }
 
-            // Step 3: Handle success
-            console.log('Signup successful')
-            navigate('/login')
+            // // Success - redirect to login
+            // navigate('/login', {
+            //     state: {
+            //         message: 'Please check your email to verify your account'
+            //     }
+            // })
 
-        } catch (error) {
-            const message = error instanceof Error ? error.message : 'An error occurred during signup'
-            setError(message)
-            console.error('Signup error:', message)
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'An error occurred')
+            console.error('Signup error:', err)
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -138,8 +168,9 @@ const SignUp = () => {
                             hover:from-emerald-500 hover:to-teal-500 
                             focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 
                             transform transition-all duration-200 hover:scale-[1.02]"
+                        disabled={isLoading}
                     >
-                        Sign Up
+                        {isLoading ? 'Signing Up...' : 'Sign Up'}
                     </button>
                 </form>
                 <div className='text-center'>

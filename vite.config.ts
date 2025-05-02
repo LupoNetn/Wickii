@@ -7,5 +7,4 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/wickii/', // Add this line - must match your repository name
 })
