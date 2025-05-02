@@ -22,6 +22,7 @@ const FeedPage = () => {
 
       const data = await response.json()
       setVideos(data.videos || [])
+      console.log(data)
     } catch (error) {
       console.error("Error fetching videos:", error)
     } finally {
