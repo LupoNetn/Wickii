@@ -13,7 +13,7 @@ import VideoDetail from "./components/VideoDetail";
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/wickii">
       <div className="min-h-screen">
         <Routes>
           <Route element={<AuthorizedLayout />}>
