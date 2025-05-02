@@ -2,8 +2,8 @@
 
 const Create = () => {
   return (
-    <div>
-      
+    <div className="m-30 text-white">
+      CREATE
     </div>
   )
 }

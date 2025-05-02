@@ -2,8 +2,8 @@
 
 const Profile = () => {
   return (
-    <div>
-      
+    <div className="m-80">
+      PROFILE
     </div>
   )
 }

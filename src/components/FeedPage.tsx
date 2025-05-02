@@ -13,7 +13,9 @@ const FeedPage = () => {
       <div className="flex-1 pb-16 md:pb-0">
         {/* Your feed content here */}
         <div className="p-4">
-          <h1 className="text-gray-100">Feed Content</h1>
+          <video src="">
+            
+          </video>
         </div>
       </div>
 
