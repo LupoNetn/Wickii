@@ -8,6 +8,7 @@ import SignUp from "./components/SignUp";
 import LogIn from "./components/LogIn";
 import FeedProtected from "./components/FeedProtected";
 import FeedPage from "./components/FeedPage";
+import AppLayout from "./components/AppLayout";
 
 const App: React.FC = () => {
   return (
@@ -16,18 +17,20 @@ const App: React.FC = () => {
         <Routes>
           <Route element={<AuthorizedLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/profile" element={<Profile />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<LogIn />} />
-            <Route
-              path="/feed"
-              element={
-                <FeedProtected>
-                  <FeedPage />
-                </FeedProtected>
-              }
-            />
+            <Route element={<AppLayout />}>
+              <Route
+                path="/feed"
+                element={
+                  <FeedProtected>
+                    <FeedPage />
+                  </FeedProtected>
+                }
+              />
+              <Route path="/create" element={<Create />} />
+              <Route path="/profile" element={<Profile />} />
+            </Route>
           </Route>
         </Routes>
       </div>

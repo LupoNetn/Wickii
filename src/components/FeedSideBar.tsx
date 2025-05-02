@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { IoHomeOutline } from "react-icons/io5"
 import { IoCreateOutline } from "react-icons/io5"
 import { CgProfile } from "react-icons/cg"
@@ -6,34 +6,32 @@ import { NavLink } from 'react-router-dom'
 
 const FeedSideBar = () => {
   const menuItems = [
-    { icon: <IoHomeOutline size={40} />, label: 'Feed', path: '/feed' },
-    { icon: <IoCreateOutline size={40} />, label: 'Create', path: '/create' },
-    { icon: <CgProfile size={40} />, label: 'Profile', path: '/profile' }
+    { icon: <IoHomeOutline size={28} />, label: 'Feed', path: '/feed' },
+    { icon: <IoCreateOutline size={28} />, label: 'Create', path: '/create' },
+    { icon: <CgProfile size={28} />, label: 'Profile', path: '/profile' }
   ]
 
-  const [open, setOpen] = useState(false)
-
   return (
-    <div className='flex flex-row'>
-      <div className='flex flex-col gap-10 w-1/4 justify-center items-start h-screen p-4'>
-        {menuItems.map((item, index) => (
-          <NavLink 
-            key={index}
-            to={item.path}
-            className={({ isActive }) => 
-              `flex items-center gap-3 p-3 rounded-lg transition-colors
-              ${isActive 
-                ? 'bg-emerald-100 text-emerald-600' 
-                : 'hover:bg-gray-100 text-gray-600 hover:text-emerald-500'
-              }`
-            }
-          >
-            <span>{item.icon}</span>
-            {open && (
-              <p className="font-medium block">{item.label}</p>
-            )}
-          </NavLink>
-        ))}
+    <div className="h-full relative border-r border-gray-700/50">
+      <div className="sticky top-20 p-4">
+        <nav className="flex flex-col space-y-4">
+          {menuItems.map((item, index) => (
+            <NavLink 
+              key={index}
+              to={item.path}
+              className={({ isActive }) => `
+                flex items-center gap-3 p-3 rounded-lg transition-colors
+                ${isActive 
+                  ? 'bg-emerald-400/10 text-emerald-400' 
+                  : 'text-gray-400 hover:bg-gray-800/50 hover:text-emerald-400'
+                }
+              `}
+            >
+              <span>{item.icon}</span>
+              <span className="font-medium">{item.label}</span>
+            </NavLink>
+          ))}
+        </nav>
       </div>
     </div>
   )

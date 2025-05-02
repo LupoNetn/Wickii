@@ -1,27 +1,69 @@
-import FeedBottomBar from "./FeedBottomBar"
-import FeedSideBar from "./FeedSideBar"
+import { useEffect, useState } from "react"
+
+
 
 const FeedPage = () => {
+  const [videos, setVideos] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  const getRandomVideos = async () => {
+    try {
+      const topics = ["education", "technology", "science", "learning", "students"]
+      const randomTopic = topics[Math.floor(Math.random() * topics.length)]
+
+      const response = await fetch(
+        `https://api.pexels.com/videos/search?query=${randomTopic}&per_page=9`,
+        {
+          headers: {
+            Authorization: 'vNmpL3RPsdURSAu41Oj08UGWqV67qDTU8MklcQgMlXQySd7fyTg7E5pq',
+          },
+        }
+      )
+
+      const data = await response.json()
+      setVideos(data.videos || [])
+    } catch (error) {
+      console.error("Error fetching videos:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    getRandomVideos()
+  }, [])
+
   return (
-    <div className="flex min-h-screen bg-gray-900">
-      {/* Sidebar - hidden on mobile, shown on md screens and up */}
-      <div className="hidden md:block w-64 border-r border-gray-700/50">
-        <FeedSideBar />
-      </div>
+    <div className="w-full min-h-screen bg-gray-900 text-white">
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <h1 className="text-2xl font-semibold mb-6">Wickii: Learn in Bits</h1>
 
-      {/* Main Content Area */}
-      <div className="flex-1 pb-16 md:pb-0">
-        {/* Your feed content here */}
-        <div className="p-4">
-          <video src="">
-            
-          </video>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {loading
+            ? Array.from({ length: 9 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="aspect-video bg-gray-800 rounded-lg animate-pulse"
+                >
+                  <div className="w-full h-full bg-gray-700"></div>
+                </div>
+              ))
+            : videos.map((video) => (
+                <div
+                  key={video.id}
+                  className="aspect-video bg-gray-800 rounded-lg overflow-hidden shadow-lg"
+                >
+                  <video
+                    className="w-full h-full object-cover"
+                    controls
+                    playsInline
+                  >
+                    <source src={video.video_files[0]?.link} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              ))}
         </div>
-      </div>
-
-      {/* Bottom Navigation - shown on mobile, hidden on md screens and up */}
-      <div className="fixed bottom-0 left-0 right-0 md:hidden bg-gray-900/80 backdrop-blur-sm border-t border-gray-700/50">
-        <FeedBottomBar />
       </div>
     </div>
   )
