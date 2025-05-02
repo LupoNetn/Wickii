@@ -162,6 +162,7 @@ const SignUp = () => {
                     </div>
 
                     <button
+                        onClick={() => navigate('/feed')}
                         type="submit"
                         className="w-full py-3 px-4 rounded-lg font-medium text-white 
                             bg-gradient-to-r from-emerald-400 to-teal-400 
