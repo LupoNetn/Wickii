@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base: '/wickii/', // Make sure this matches your repo name exactly (case sensitive)
+  base: '/Wickii/', // Make sure this matches your repo name exactly (case sensitive)
 });
