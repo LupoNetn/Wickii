@@ -11,36 +11,28 @@ const SignUp = () => {
     const navigate = useNavigate()
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        setIsLoading(true)
-        setError(null)
+        e.preventDefault();
+        setIsLoading(true);
+        setError(null);
 
         try {
             // Input validation
             if (!email || !password || !username) {
-                throw new Error('All fields are required')
+                throw new Error('All fields are required');
             }
 
             if (password.length < 6) {
-                throw new Error('Password must be at least 6 characters')
+                throw new Error('Password must be at least 6 characters');
             }
 
             if (username.length < 3) {
-                throw new Error('Username must be at least 3 characters')
+                throw new Error('Username must be at least 3 characters');
             }
 
-            // Check username availability
-            const { data: existingUser } = await supabase
-                .from('profiles')
-                .select('username')
-                .eq('username', username.trim())
-                .maybeSingle()
-
-            if (existingUser) {
-                throw new Error('Username already taken')
-            }
-
-            // Sign up user
+            // For production: Skip actual signup and navigate directly
+            navigate('/feed');
+            
+            /* Comment out actual signup logic for now
             const { data, error: signUpError } = await supabase.auth.signUp({
                 email: email.toLowerCase().trim(),
                 password,
@@ -49,44 +41,22 @@ const SignUp = () => {
                         username: username.trim()
                     }
                 }
-            })
+            });
 
-            if (signUpError) throw signUpError
+            if (signUpError) throw signUpError;
 
-            // Verify user data exists
             if (!data?.user?.id) {
-                throw new Error('Sign up failed - please try again')
+                throw new Error('Sign up failed - please try again');
             }
-
-            // Create profile
-            // const { error: profileError } = await supabase
-            //     .from('profiles')
-            //     .insert({
-            //         id: data.user.id,
-            //         username: username.trim(),
-            //         email: email.toLowerCase().trim()
-            //     })
-
-            // if (profileError) {
-            //     console.error('Profile creation error:', profileError)
-            //     await supabase.auth.signOut()
-            //     throw new Error(`Profile creation failed: ${profileError.message}`)
-            // }
-
-            // // Success - redirect to login
-            // navigate('/login', {
-            //     state: {
-            //         message: 'Please check your email to verify your account'
-            //     }
-            // })
+            */
 
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'An error occurred')
-            console.error('Signup error:', err)
+            setError(err instanceof Error ? err.message : 'An error occurred');
+            console.error('Signup error:', err);
         } finally {
-            setIsLoading(false)
+            setIsLoading(false);
         }
-    }
+    };
 
     return (
         <div className="min-h-screen flex items-center justify-center px-4 py-12">
@@ -162,7 +132,7 @@ const SignUp = () => {
                     </div>
 
                     <button
-                        onClick={() => navigate('/feed')}
+                        
                         type="submit"
                         className="w-full py-3 px-4 rounded-lg font-medium text-white 
                             bg-gradient-to-r from-emerald-400 to-teal-400 

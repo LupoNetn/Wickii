@@ -2,44 +2,31 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase-client";
 
-import type { Session } from "@supabase/supabase-js";
-
 const FeedProtected = ({ children }: { children: React.ReactNode }) => {
-  const [session, setSession] = useState<Boolean | null>();
-  const [loading, setLoading] = useState(true);
+  const [session, setSession] = useState<Boolean | null>(true); // Set default to true for production
+  const [loading, setLoading] = useState(false); // Set initial loading to false
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Initial session check
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      //fake true session for production
-      setSession(true);
-      setLoading(false);
+    // In production, we'll always allow access
+    setSession(true);
+    setLoading(false);
 
-      navigate("/login");
-    });
-
-    // Listen for auth changes
+    // Keep subscription for future auth implementation
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(true);
     });
 
-    // Clean up
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [navigate]);
+    return () => subscription.unsubscribe();
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!session) {
-    return null; // Navigation already triggered
-  }
-
+  // Always render children in production
   return <>{children}</>;
 };
 
