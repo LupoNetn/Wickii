@@ -16,9 +16,7 @@ const FeedProtected = ({ children }: { children: React.ReactNode }) => {
       setSession(true);
       setLoading(false);
 
-    //   if (!session) {
-    //     navigate("/login");
-    //   }
+      navigate("/login");
     });
 
     // Listen for auth changes
@@ -26,9 +24,6 @@ const FeedProtected = ({ children }: { children: React.ReactNode }) => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(true);
-    //   if (!session) {
-    //     navigate("/login");
-    //   }
     });
 
     // Clean up

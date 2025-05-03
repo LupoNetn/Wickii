@@ -14,10 +14,8 @@ const Navbar = () => {
       <div className='container mx-auto p-4 lg:px-14 lg:py-5'>
         <div className='flex justify-between items-center'>
           <div>
-            <Link to='/'>
-            <span className='text-2xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 text-transparent bg-clip-text'>
+            <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 text-transparent bg-clip-text">
               WICKII
-            </span>
             </Link>
           </div>
           <button 

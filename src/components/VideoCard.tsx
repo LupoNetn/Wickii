@@ -56,7 +56,7 @@ const VideoCard = ({ video }: VideoCardProps) => {
   }
 
   const handleCardClick = () => {
-    navigate(`/feed/${video.id}`)
+    navigate(`/feed/${video.id}`)  // HashRouter will automatically handle the '#'
   }
 
   return (

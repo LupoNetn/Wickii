@@ -18,20 +18,20 @@ const App: React.FC = () => {
         <Routes>
           <Route element={<AuthorizedLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<LogIn />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="login" element={<LogIn />} />
             <Route element={<AppLayout />}>
               <Route
-                path="/feed"
+                path="feed"
                 element={
                   <FeedProtected>
                     <FeedPage />
                   </FeedProtected>
                 }
               />
-              <Route path="/feed/:id" element={<VideoDetail />} />
-              <Route path="/create" element={<Create />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="feed/:id" element={<VideoDetail />} />
+              <Route path="create" element={<Create />} />
+              <Route path="profile" element={<Profile />} />
             </Route>
           </Route>
         </Routes>
