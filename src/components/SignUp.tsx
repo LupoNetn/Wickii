@@ -30,7 +30,7 @@ const SignUp = () => {
             }
 
             // For production: Skip actual signup and navigate directly
-            navigate('/feed');
+            navigate('feed', { replace: true });
             
             /* Comment out actual signup logic for now
             const { data, error: signUpError } = await supabase.auth.signUp({
