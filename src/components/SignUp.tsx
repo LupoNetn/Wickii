@@ -29,32 +29,12 @@ const SignUp = () => {
                 throw new Error('Username must be at least 3 characters');
             }
 
-            // For production: Skip actual signup and navigate directly
-            navigate('feed', { replace: true });
-            
-            /* Comment out actual signup logic for now
-            const { data, error: signUpError } = await supabase.auth.signUp({
-                email: email.toLowerCase().trim(),
-                password,
-                options: {
-                    data: {
-                        username: username.trim()
-                    }
-                }
-            });
-
-            if (signUpError) throw signUpError;
-
-            if (!data?.user?.id) {
-                throw new Error('Sign up failed - please try again');
-            }
-            */
-
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An error occurred');
             console.error('Signup error:', err);
         } finally {
             setIsLoading(false);
+            navigate('/feed')
         }
     };
 
